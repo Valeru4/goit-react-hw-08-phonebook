@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { Route, Routes, NavLink } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
