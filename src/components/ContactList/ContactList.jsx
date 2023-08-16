@@ -1,5 +1,5 @@
 import { Item, List, Text, Button, Paragraph } from './Contact.styled';
-import { ContactSelector, FilterSelector } from 'redux/ContactSlice/selectors';
+import { ContactSelector, FilterSelector } from 'redux/authSlice/selectors';
 import { useEffect } from 'react';
 import { deleteContact, fetchContactsList } from 'redux/operations';
 

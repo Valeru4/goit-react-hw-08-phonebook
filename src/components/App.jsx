@@ -1,21 +1,22 @@
 import { Suspense, lazy } from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
+import { NavigationLink } from './App.styled';
+
+const HomePage = lazy(() => import('pages/HomePages/HomePage'));
 const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
-
-const HomePage = lazy(() => import('pages/HomePages/HomePage'));
 
 export const App = () => {
   return (
     <div>
       <header>
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/contacts">Contacts</NavLink>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/register">Register</NavLink>
+          <NavigationLink to="/">Home</NavigationLink>
+          <NavigationLink to="/contacts">Contacts</NavigationLink>
+          <NavigationLink to="/login">Login</NavigationLink>
+          <NavigationLink to="/register">Register</NavigationLink>
         </nav>
       </header>
       <main>

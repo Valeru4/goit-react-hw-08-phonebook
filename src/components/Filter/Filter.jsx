@@ -1,7 +1,7 @@
-import { FilterSelector } from 'redux/ContactSlice/selectors';
+import { FilterSelector } from 'redux/authSlice/selectors';
 import { Container, Heading, Input } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilteredName } from 'redux/ContactSlice/contactSlice';
+import { getFilteredName } from 'redux/authSlice/authSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
