@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const FormContainer = styled.div`
+  font-family: Arial, sans-serif;
+  background-color: #a9a9a9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin-top: 20px;
+`;
 export const Heading = styled.h1`
   margin-bottom: 15px;
   font-size: 30px;

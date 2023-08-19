@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { registerUserThunk } from 'redux/authSlice/operations';
+import { loginUserThunk } from 'redux/authSlice/operations';
 import {
   Button,
   Form,
@@ -9,42 +9,29 @@ import {
   Input,
   Label,
   Text,
-} from './RegisterForm.styled';
+} from './LoginForm.styled';
 
-export const RegisterForm = () => {
+export const LoginForm = () => {
   const dispatch = useDispatch();
 
   const OnHandlerSubmit = event => {
     event.preventDefault();
     const form = event.currentTarget;
-    const name = form.elements.userName.value;
     const email = form.elements.userEmail.value;
     const password = form.elements.userPassword.value;
 
     const userDataFinal = {
-      name,
       email,
       password,
     };
 
-    dispatch(registerUserThunk(userDataFinal));
+    dispatch(loginUserThunk(userDataFinal));
   };
 
   return (
     <FormContainer>
-      <Heading> Registration form</Heading>
+      <Heading> Login into your account</Heading>
       <Form onSubmit={OnHandlerSubmit}>
-        <Label>
-          <Text>Name</Text>
-          <Input
-            name="userName"
-            type="text"
-            required
-            minLength={2}
-            placeholder="Enter your name"
-          />
-        </Label>
-
         <Label>
           <Text>Email</Text>
           <Input

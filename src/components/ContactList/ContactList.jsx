@@ -1,34 +1,27 @@
-import { Item, List, Text, Button, Paragraph } from './Contact.styled';
-import { ContactSelector, FilterSelector } from 'redux/authSlice/selectors';
-import { useEffect } from 'react';
-import { deleteContact, fetchContactsList } from 'redux/operations';
+import { Item, List, Text, Button } from './ContactlList.styled';
+
+import { userContactSelector } from 'redux/contactSlice.js/selectors';
+import { deleteContactThunk } from 'redux/contactSlice.js/operations';
 
 const { useSelector, useDispatch } = require('react-redux');
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(ContactSelector);
-  const filter = useSelector(FilterSelector);
+  const contacts = useSelector(userContactSelector);
 
-  useEffect(() => {
-    dispatch(fetchContactsList());
-  }, [dispatch]);
-
-  const filteredContact = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
-  if (filteredContact.length === 0)
-    return <Paragraph>There is no contact added</Paragraph>;
+  // console.log(contacts);
 
   return (
     <List>
-      {filteredContact?.map(contact => (
+      {contacts?.map(contact => (
         <Item key={contact.id}>
           <Text>
             {contact.name}: {contact.number}
           </Text>
-          <Button onClick={() => dispatch(deleteContact(contact.id))}>
+          <Button
+            type="button"
+            onClick={() => dispatch(deleteContactThunk(contact.id))}
+          >
             &times;
           </Button>
         </Item>

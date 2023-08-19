@@ -1,13 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Label, Input, Button } from './ContactForm.styled';
+import {
+  Form,
+  Label,
+  Input,
+  Button,
+  FormContainer,
+  Heading,
+  Text,
+} from './ContactForm.styled';
 import { useState } from 'react';
-// import { nanoid } from '@reduxjs/toolkit';
-import { ContactSelector } from 'redux/authSlice/selectors';
-import { addContacts } from 'redux/operations';
+
+import { userContactSelector } from 'redux/contactSlice.js/selectors';
+import { addContactThunk } from 'redux/contactSlice.js/operations';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(ContactSelector);
+  const contacts = useSelector(userContactSelector);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -35,7 +43,8 @@ export const ContactForm = () => {
     }
 
     // console.log(contact);
-    dispatch(addContacts(contact));
+    dispatch(addContactThunk(contact));
+    console.log(contact);
     resetForm();
   };
 
@@ -46,27 +55,35 @@ export const ContactForm = () => {
 
   return (
     <>
+      <Heading> Enter new contact</Heading>
       <Form onSubmit={event => event.preventDefault()}>
-        <Label>Name</Label>
-        <Input
-          type="text"
-          name="name"
-          value={name}
-          onChange={event => setName(event.target.value)}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          required
-        />
+        <Label>
+          <Text>Name</Text>
+          <Input
+            type="text"
+            name="name"
+            value={name}
+            placeholder="Enter your name"
+            onChange={event => setName(event.target.value)}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            required
+          />
+        </Label>
 
-        <Label>Number</Label>
-        <Input
-          type="tel"
-          name="number"
-          value={number}
-          onChange={event => setNumber(event.target.value)}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          required
-        />
-        <Button onClick={() => handlerAddContacts()} type="submit">
+        <Label>
+          <Text>Number</Text>
+          <Input
+            type="tel"
+            name="number"
+            value={number}
+            onChange={event => setNumber(event.target.value)}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            required
+            placeholder="Enter your number"
+          />
+        </Label>
+
+        <Button type="submit" onClick={() => handlerAddContacts()}>
           Add contact
         </Button>
       </Form>

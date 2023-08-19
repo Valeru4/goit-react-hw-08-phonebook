@@ -1,4 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {
+  loginUserThunk,
+  logoutUserThunk,
+  refreshUserThunk,
+  registerUserThunk,
+} from 'redux/authSlice/operations';
 
 const initialState = {
   isLoading: false,
@@ -8,55 +14,79 @@ const initialState = {
   authentificated: false,
 };
 
-export const authSlice = createSlice(
-  {
-    name: 'auth',
-    initialState: initialState,
-  }
+export const authSlice = createSlice({
+  name: 'auth',
+  initialState: initialState,
 
-  //   extraReducers: builder =>
-  //     builder
-  //       .addCase(fetchContactsList.pending, state => {
-  //         state.isLoading = true;
-  //         state.error = null;
-  //       })
-  //       .addCase(fetchContactsList.fulfilled, (state, action) => {
-  //         state.isLoading = false;
-  //         state.items = action.payload;
-  //       })
-  //       .addCase(fetchContactsList.rejected, (state, action) => {
-  //         state.isLoading = false;
-  //         state.error = action.payload;
-  //       })
+  extraReducers: builder =>
+    builder
+      .addCase(registerUserThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+        state.authentificated = false;
+      })
+      .addCase(registerUserThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.authentificated = true;
+        state.token = action.payload.token;
+        state.userData = action.payload.user;
+      })
+      .addCase(registerUserThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
 
-  //       .addCase(addContacts.pending, state => {
-  //         state.isLoading = true;
-  //         state.error = null;
-  //       })
-  //       .addCase(addContacts.fulfilled, (state, action) => {
-  //         state.isLoading = false;
-  //         state.items.push(action.payload);
-  //       })
-  //       .addCase(addContacts.rejected, (state, action) => {
-  //         state.isLoading = false;
-  //         state.error = action.payload;
-  //       })
+      // ===========Login============
 
-  //       .addCase(deleteContact.pending, state => {
-  //         state.isLoading = true;
-  //         state.error = null;
-  //       })
-  //       .addCase(deleteContact.fulfilled, (state, action) => {
-  //         state.isLoading = false;
-  //         state.items = state.items.filter(
-  //           contact => contact.id !== action.payload
-  //         );
-  //       })
-  //       .addCase(deleteContact.rejected, (state, action) => {
-  //         state.isLoading = false;
-  //         state.error = action.payload;
-  //       }),
-);
+      .addCase(loginUserThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+        state.authentificated = false;
+      })
+      .addCase(loginUserThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.authentificated = true;
+        state.token = action.payload.token;
+        state.userData = action.payload.user;
+      })
+      .addCase(loginUserThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // ===========Refresh============
+
+      .addCase(refreshUserThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(refreshUserThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.authentificated = true;
+        state.userData = action.payload;
+      })
+      .addCase(refreshUserThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // ===========Logout============
+
+      .addCase(logoutUserThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logoutUserThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.authentificated = false;
+        state.userData = null;
+        state.token = null;
+      })
+      .addCase(logoutUserThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      }),
+});
 
 // export const { getFilteredName } = contactSlice.actions;
 export const authReducer = authSlice.reducer;
