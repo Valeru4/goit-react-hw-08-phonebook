@@ -51,7 +51,7 @@ export const App = () => {
               <Navigation>
                 <HomeLink to="/">PhoneBook</HomeLink>
                 <Wrapper>
-                  <NavigationLink to="/login">Login</NavigationLink>
+                  <NavigationLink to="/login">Log In</NavigationLink>
                   <NavigationLink to="/register">Register</NavigationLink>
                 </Wrapper>
               </Navigation>
