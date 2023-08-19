@@ -10,3 +10,10 @@ export const Section = styled.section`
   height: 80vh;
   margin-top: 20px;
 `;
+
+export const ListContacts = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+`;

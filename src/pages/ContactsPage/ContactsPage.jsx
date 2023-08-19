@@ -10,7 +10,7 @@ import {
   contactIsLoadingSelector,
   userContactSelector,
 } from 'redux/contactSlice.js/selectors';
-import { List, Section } from './ContactsPage.styled';
+import { List, ListContacts, Section } from './ContactsPage.styled';
 
 const ContactsPage = () => {
   const authentificated = useSelector(authentificatedSelector);
@@ -34,7 +34,7 @@ const ContactsPage = () => {
       {isLoading && <Loader />}
       {error && <p> Something goes wrong. {error}</p>}
 
-      <ul>{showContacts && <ContactList />}</ul>
+      <ListContacts>{showContacts && <ContactList />}</ListContacts>
     </Section>
   );
 };

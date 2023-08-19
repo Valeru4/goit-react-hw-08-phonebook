@@ -12,7 +12,7 @@ export const ContactList = () => {
   // console.log(contacts);
 
   return (
-    <List>
+    <>
       {contacts?.map(contact => (
         <Item key={contact.id}>
           <Text>
@@ -26,6 +26,6 @@ export const ContactList = () => {
           </Button>
         </Item>
       ))}
-    </List>
+    </>
   );
 };

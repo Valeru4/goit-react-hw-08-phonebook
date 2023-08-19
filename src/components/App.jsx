@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { HomeLink, Navigation, NavigationLink, Wrapper } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +18,7 @@ const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
 export const App = () => {
   const dispatch = useDispatch();
   const token = useSelector(TokenSelector);
+  const navigate = useNavigate();
   const authentificated = useSelector(authentificatedSelector);
   useEffect(() => {
     if (!token || authentificated) {
@@ -28,8 +29,10 @@ export const App = () => {
   }, [token, authentificated, dispatch]);
 
   const HandleLogOut = () => {
-    console.log('logout');
     dispatch(logoutUserThunk());
+    if (!authentificated) {
+      navigate('/');
+    }
   };
 
   return (
@@ -37,21 +40,22 @@ export const App = () => {
       <header>
         <nav>
           {authentificated ? (
-            <>
-              <NavigationLink to="/contacts">Contacts</NavigationLink>{' '}
-              <button onClick={HandleLogOut} type="button">
-                Log out
-              </button>
-            </>
-          ) : (
             <Navigation>
-              <HomeLink to="/">PhoneBook</HomeLink>
-
-              <Wrapper>
-                <NavigationLink to="/login">Login</NavigationLink>
-                <NavigationLink to="/register">Register</NavigationLink>
-              </Wrapper>
+              <HomeLink to="/contacts">Contacts</HomeLink>
+              <NavigationLink onClick={HandleLogOut} type="button">
+                Log out
+              </NavigationLink>
             </Navigation>
+          ) : (
+            <>
+              <Navigation>
+                <HomeLink to="/">PhoneBook</HomeLink>
+                <Wrapper>
+                  <NavigationLink to="/login">Login</NavigationLink>
+                  <NavigationLink to="/register">Register</NavigationLink>
+                </Wrapper>
+              </Navigation>
+            </>
           )}
         </nav>
       </header>
