@@ -4,7 +4,6 @@ import {
   Label,
   Input,
   Button,
-  FormContainer,
   Heading,
   Text,
 } from './ContactForm.styled';

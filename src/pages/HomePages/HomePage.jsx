@@ -1,7 +1,6 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
-  Container,
   Heading,
   Image,
   ImageContainer,

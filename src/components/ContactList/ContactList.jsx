@@ -1,4 +1,4 @@
-import { Item, List, Text, Button } from './ContactlList.styled';
+import { Item, Text, Button } from './ContactlList.styled';
 
 import { userContactSelector } from 'redux/contactSlice.js/selectors';
 import { deleteContactThunk } from 'redux/contactSlice.js/operations';

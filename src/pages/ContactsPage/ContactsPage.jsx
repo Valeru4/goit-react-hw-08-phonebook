@@ -10,7 +10,7 @@ import {
   contactIsLoadingSelector,
   userContactSelector,
 } from 'redux/contactSlice.js/selectors';
-import { List, ListContacts, Section } from './ContactsPage.styled';
+import { ListContacts, Section } from './ContactsPage.styled';
 
 const ContactsPage = () => {
   const authentificated = useSelector(authentificatedSelector);
